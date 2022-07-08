@@ -14,5 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return [
+        'App Name' => config('app.name'),
+        'Powered By' => [
+            'Name' => 'Laravel',
+            'Version' => app()->version()
+        ],
+    ];
 });
