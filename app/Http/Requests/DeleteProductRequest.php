@@ -17,6 +17,18 @@ class DeleteProductRequest extends FormRequest
     }
 
     /**
+    * Parse the ids to associative array before validating.
+    *
+    * @return void
+    */
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'ids' => json_decode($this->ids, true),
+        ]);
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string, mixed>
@@ -25,7 +37,7 @@ class DeleteProductRequest extends FormRequest
     {
         return [
             'ids' => 'required|array',
-            'ids.*' => 'required|numeric',
+            'ids.*' => 'required|numeric|min:1',
         ];
     }
 }

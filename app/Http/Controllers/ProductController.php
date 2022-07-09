@@ -22,17 +22,7 @@ class ProductController extends Controller
     {
         $products = $this->productService->getAllProducts();
 
-        return $this->successResponse($products, null, 201);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return $this->successResponse($products);
     }
 
     /**
@@ -45,7 +35,7 @@ class ProductController extends Controller
     {
         $product = $this->productService->storeProduct($request->validated());
 
-        return $this->successResponse($product);
+        return $this->successResponse($product, null, 201);
     }
 
     /**

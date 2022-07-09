@@ -18,7 +18,7 @@ Route::get('/products', [ProductController::class, 'index'])->name('get-products
 
 Route::post('/products', [ProductController::class, 'store'])->name('store-products');
 
-Route::delete('/products', [ProductController::class, 'destroy'])->name('delete-products');
+Route::post('/delete-products', [ProductController::class, 'destroy'])->name('delete-products');
 
 Route::fallback(function () {
     return response()->json([
