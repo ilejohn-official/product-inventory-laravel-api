@@ -17,6 +17,44 @@ class StoreProductRequest extends FormRequest
     }
 
     /**
+     * Parse the Atrribute Value to associative array before validating.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'attributeValue' => json_decode($this->attributeValue, true),
+        ]);
+    }
+
+    /**
+     * Get array of attribute value keys
+     *
+     * @return array
+     */
+    protected function attributeValue()
+    {
+        return array_keys($this->toArray()['attributeValue']);
+    }
+
+    /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array
+     */
+    public function attributes()
+    {
+        return [
+            'attributeValue.height' => $this->attributeValue()[0],
+            'attributeValue.width' => array_key_exists(1, $this->attributeValue()) ? $this->attributeValue()[1] : '',
+            'attributeValue.lenght' => array_key_exists(2, $this->attributeValue()) ? $this->attributeValue()[2] : '',
+            'attributeValue.weight' => $this->attributeValue()[0],
+            'attributeValue.size' => $this->attributeValue()[0],
+        ];
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string, mixed>
