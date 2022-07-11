@@ -18,7 +18,6 @@ return new class extends Migration {
             $table->string('name');
             $table->decimal('price', $precision = 8, $scale = 2);
             $table->json('attribute');
-            $table->softDeletes();
             $table->timestamps();
         });
     }
