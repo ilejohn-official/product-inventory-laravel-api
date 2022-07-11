@@ -14,11 +14,11 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::get('/products', [ProductController::class, 'index'])->name('get-products');
-
-Route::post('/products', [ProductController::class, 'store'])->name('store-products');
-
-Route::post('/delete-products', [ProductController::class, 'destroy'])->name('delete-products');
+Route::controller(ProductController::class)->group(function () {
+    Route::get('/products', 'index');
+    Route::post('/products', 'store');
+    Route::post('/delete-products', 'destroy');
+});
 
 Route::fallback(function () {
     return response()->json([
